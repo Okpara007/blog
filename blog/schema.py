@@ -2,6 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from .models import Author, Post, Comment
 from django.core.paginator import Paginator
+import graphql_jwt
 
 class AuthorType(DjangoObjectType):
     class Meta:
@@ -55,6 +56,8 @@ class CreatePost(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
+
 
