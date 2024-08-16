@@ -51,13 +51,15 @@ class CreatePost(graphene.Mutation):
         if not user.is_authenticated:
             raise Exception("Authentication required")
 
-        post = Post.objects.create(title=title, content=content, author=user)
+        # Assuming Author is linked to User
+        author = Author.objects.get(user=user)
+
+        post = Post.objects.create(title=title, content=content, author=author)
         return CreatePost(post=post)
+
 
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
-
-

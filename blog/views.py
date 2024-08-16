@@ -1,4 +1,8 @@
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("Welcome to the Blog API. Go to /graphql to interact with the API.")
+    return HttpResponse(
+        "I apologize for any inconvenience. Please access the GraphQL interface at "
+        "'https://blog-api-vyot.onrender.com/graphql'. To obtain a token, go to "
+        "'https://blog-api-vyot.onrender.com/api/token/'. Once again, I apologize for any inconvenience."
+    )
